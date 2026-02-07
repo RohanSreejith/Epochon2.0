@@ -1,0 +1,20 @@
+# Datasets (Too large for Git)
+backend/app/data/
+*.csv
+*.pdf
+*.zip
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+backend/.env
+backend/.venv
+backend/venv
+.pytest_cache/
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.env
+junk/

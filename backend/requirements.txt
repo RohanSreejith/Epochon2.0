@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+groq
+python-dotenv
+pandas
+numpy
+scikit-learn
+kaggle
+pydantic
+python-multipart
+requests
