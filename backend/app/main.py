@@ -21,8 +21,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize Coordinator (Singleton-ish)
-coordinator = Coordinator()
+# Initialize Coordinators
+coordinator = Coordinator()  # Legacy coordinator
+
+# Google ADK orchestration (feature flag)
+USE_ENHANCED_ORCHESTRATION = os.getenv("USE_ENHANCED_ORCHESTRATION", "false").lower() == "true"
+
+if USE_ENHANCED_ORCHESTRATION:
+    from .orchestration.adk_coordinator import get_adk_coordinator
+    adk_coordinator = get_adk_coordinator()
 
 class AnalyzeRequest(BaseModel):
     text: str
@@ -41,7 +48,11 @@ async def analyze_case(request: AnalyzeRequest):
         raise HTTPException(status_code=400, detail="Text is required")
     
     try:
-        result = coordinator.run_debate(request.text)
+        # Route to ADK coordinator if enabled
+        if USE_ENHANCED_ORCHESTRATION:
+            result = adk_coordinator.analyze(request.text)
+        else:
+            result = coordinator.run_debate(request.text)
         return result
     except Exception as e:
         print(f"Error processing request: {e}")

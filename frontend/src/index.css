@@ -1,31 +1,45 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+@theme {
+  --color-gov-blue: #003366;
+  --color-gov-saffron: #FF9933;
+  --color-gov-green: #138808;
+  --color-gov-text: #1a1a1a;
+  --color-gov-bg: #ffffff;
+}
+
+/* Custom Utilities */
+@utility glass-panel {
+  @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-xl;
+}
+
+@utility neural-link-log {
+  @apply font-mono text-xs text-green-400 opacity-80;
+}
+
+/* Base Styles */
 @layer base {
+
+  html,
+  body,
+  #root {
+    @apply h-screen w-screen m-0 p-0;
+  }
+
   body {
-    @apply bg-kiosk-bg text-white font-sans overflow-hidden;
+    @apply font-sans bg-gov-bg text-gov-text;
   }
 }
 
-@layer components {
-  .neural-link-log {
-    @apply font-mono text-xs text-green-400 opacity-80;
-  }
-  
-  .glass-panel {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-xl;
-  }
-}
-
-/* Custom Scrollbar */
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 2px;
+  @apply bg-gray-400 rounded-full;
 }

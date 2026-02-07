@@ -9,3 +9,7 @@ kaggle
 pydantic
 python-multipart
 requests
+
+# Google ADK Integration
+google-adk>=0.1.0
+litellm>=1.0.0

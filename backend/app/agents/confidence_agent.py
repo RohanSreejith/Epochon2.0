@@ -6,7 +6,7 @@ class ConfidenceAgent:
         self.llm = GroqClient()
         
     def analyze(self, query, legal_advice, risk_analysis):
-        prompt = f"""You are the Confidence Assessment Agent. You are SKEPTICAL.
+        prompt = f"""You are the Confidence Assessment Agent. You are OBJECTIVE.
         User Situation: "{query}"
         Legal Advice: "{legal_advice}"
         Risk Analysis: "{risk_analysis}"
@@ -15,7 +15,7 @@ class ConfidenceAgent:
         1. Evaluate if the user provided enough information.
         2. Evaluate if the legal advice is specific and grounded.
         3. Assign a confidence score (0-100%).
-        4. If < 40%, trigger REFUSAL.
+        4. If < 30%, trigger REFUSAL.
         
         Output Format:
         {{
@@ -27,7 +27,7 @@ class ConfidenceAgent:
         Return ONLY valid JSON.
         """
         
-        response = self.llm.get_completion(prompt, system_prompt="You are a strict evaluator. Be harsh.")
+        response = self.llm.get_completion(prompt, system_prompt="You are a helpful evaluator.")
         return response
 
 if __name__ == "__main__":
